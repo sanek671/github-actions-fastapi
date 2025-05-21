@@ -1,17 +1,18 @@
 import asyncio
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-from database import engine
-from models import Base
-from crud import router
+from src.database import engine
+from src.models import Base
+from src.crud import router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Handle startup and shutdown events for the application"""
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    if os.getenv("TESTING") != "1":
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
     yield
 
 

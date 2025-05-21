@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 
-from database import Base
+from src.database import Base
 
 
 class Recipe(Base):

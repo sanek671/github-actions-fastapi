@@ -1,5 +1,5 @@
 from typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class RecipeBase(BaseModel):
@@ -19,8 +19,7 @@ class RecipeList(RecipeBase):
     id: int
     views: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RecipeDetail(RecipeBase):
@@ -30,5 +29,4 @@ class RecipeDetail(RecipeBase):
     description: str
     views: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

@@ -1,0 +1,7 @@
+name: Test FastAPI app
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code

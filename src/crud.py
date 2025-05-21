@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select, desc, asc
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import get_db
-from models import Recipe, RecipeIngredient
-from schemas import RecipeList, RecipeDetail, RecipeCreate
+from src.database import get_db
+from src.models import Recipe, RecipeIngredient
+from src.schemas import RecipeList, RecipeDetail, RecipeCreate
 
 router = APIRouter(tags=["recipes"])
 

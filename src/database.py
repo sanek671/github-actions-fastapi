@@ -1,8 +1,14 @@
+import os
+
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 
-DATABASE_URL = "sqlite+aiosqlite:///recipes.db"
+# Use in-memory database for testing
+if os.environ.get("TESTING") == "1":
+    DATABASE_URL = "sqlite+aiosqlite:///:memory:"
+else:
+    DATABASE_URL = "sqlite+aiosqlite:///recipes.db"
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
