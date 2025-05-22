@@ -20,7 +20,7 @@ async def get_recipes(db: AsyncSession = Depends(get_db)) -> List[RecipeList]:
     """
     query = select(Recipe).order_by(desc(Recipe.views), asc(Recipe.cooking_time))
     result = await db.execute(query)
-    recipes: List[Recipe] = result.scalars().all()
+    recipes: List[Recipe] = list(result.scalars().all())
     return [RecipeList.model_validate(recipe) for recipe in recipes]
 
 
@@ -44,7 +44,7 @@ async def get_recipe(recipe_id: int, db: AsyncSession = Depends(get_db)) -> Reci
 
     ingredients_query = select(RecipeIngredient.ingredient_name).where(RecipeIngredient.recipe_id == recipe_id)
     ingredients_result = await db.execute(ingredients_query)
-    ingredients: List[str] = ingredients_result.scalars().all()
+    ingredients: List[str] = list(ingredients_result.scalars().all())
 
     recipe_id_int: int = int(recipe.id)
     title_str: str = str(recipe.title)
@@ -88,7 +88,7 @@ async def create_recipe(recipe_data: RecipeCreate, db: AsyncSession = Depends(ge
 
     query = select(RecipeIngredient.ingredient_name).where(RecipeIngredient.recipe_id == db_recipe.id)
     result = await db.execute(query)
-    ingredients = result.scalars().all()
+    ingredients = list(result.scalars().all())
 
     recipe_id_int: int = int(db_recipe.id)
     title_str: str = str(db_recipe.title)
