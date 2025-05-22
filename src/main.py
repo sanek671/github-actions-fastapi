@@ -30,5 +30,3 @@ app.include_router(router)
 async def root():
     """API root endpoint"""
     return {"message": "Welcome to the simplified Cookbook API!"}
-
-# Run app with: uvicorn main:app --reload

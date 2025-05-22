@@ -7,6 +7,7 @@ from src.database import get_db
 from src.models import Recipe, RecipeIngredient
 from src.schemas import RecipeList, RecipeDetail, RecipeCreate
 
+
 router = APIRouter(tags=["recipes"])
 
 

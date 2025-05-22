@@ -35,7 +35,6 @@ async def test_create_recipe(client, db_session):
 @pytest.mark.asyncio
 async def test_get_recipes(client, db_session):
     """Test retrieving all recipes"""
-    # First create a recipe
     recipe_data = {
         "title": "Test Recipe",
         "cooking_time": 30,
@@ -44,7 +43,6 @@ async def test_get_recipes(client, db_session):
     }
     await client.post("/recipes", json=recipe_data)
 
-    # Now get all recipes
     response = await client.get("/recipes")
 
     assert response.status_code == 200
@@ -57,7 +55,6 @@ async def test_get_recipes(client, db_session):
 @pytest.mark.asyncio
 async def test_get_recipe_detail(client, db_session):
     """Test retrieving a specific recipe increases view count"""
-    # First create a recipe
     recipe_data = {
         "title": "Test Recipe",
         "cooking_time": 30,
@@ -67,13 +64,11 @@ async def test_get_recipe_detail(client, db_session):
     create_response = await client.post("/recipes", json=recipe_data)
     recipe_id = create_response.json()["id"]
 
-    # Get the recipe first time
     response1 = await client.get(f"/recipes/{recipe_id}")
     assert response1.status_code == 200
     data1 = response1.json()
     assert data1["views"] == 1
 
-    # Get the recipe second time (view count should increase)
     response2 = await client.get(f"/recipes/{recipe_id}")
     assert response2.status_code == 200
     data2 = response2.json()

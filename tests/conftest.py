@@ -33,6 +33,7 @@ async def db_session():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
 
+
 @pytest_asyncio.fixture(scope="session")
 async def client(db_session):
     transport = httpx.ASGITransport(app=app)
