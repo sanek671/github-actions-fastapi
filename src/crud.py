@@ -46,12 +46,18 @@ async def get_recipe(recipe_id: int, db: AsyncSession = Depends(get_db)) -> Reci
     ingredients_result = await db.execute(ingredients_query)
     ingredients: List[str] = ingredients_result.scalars().all()
 
+    recipe_id_int: int = int(recipe.id)
+    title_str: str = str(recipe.title)
+    cooking_time_int: int = int(recipe.cooking_time)
+    description_str: str = str(recipe.description)
+    views_int: int = int(recipe.views)
+
     return RecipeDetail(
-        id=recipe.id,
-        title=recipe.title,
-        cooking_time=recipe.cooking_time,
-        description=recipe.description,
-        views=recipe.views,
+        id=recipe_id_int,
+        title=title_str,
+        cooking_time=cooking_time_int,
+        description=description_str,
+        views=views_int,
         ingredients=ingredients
     )
 
@@ -84,11 +90,17 @@ async def create_recipe(recipe_data: RecipeCreate, db: AsyncSession = Depends(ge
     result = await db.execute(query)
     ingredients = result.scalars().all()
 
+    recipe_id_int: int = int(db_recipe.id)
+    title_str: str = str(db_recipe.title)
+    cooking_time_int: int = int(db_recipe.cooking_time)
+    description_str: str = str(db_recipe.description)
+    views_int: int = int(db_recipe.views)
+
     return RecipeDetail(
-        id=db_recipe.id,
-        title=db_recipe.title,
-        cooking_time=db_recipe.cooking_time,
-        description=db_recipe.description,
-        views=db_recipe.views,
+        id=recipe_id_int,
+        title=title_str,
+        cooking_time=cooking_time_int,
+        description=description_str,
+        views=views_int,
         ingredients=ingredients
     )
