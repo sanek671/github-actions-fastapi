@@ -1,10 +1,11 @@
 import os
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
+from src.crud import router
 from src.database import engine
 from src.models import Base
-from src.crud import router
 
 
 @asynccontextmanager

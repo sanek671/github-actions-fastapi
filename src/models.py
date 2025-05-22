@@ -1,7 +1,8 @@
 from typing import List
-from sqlalchemy import Integer, String, Text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from sqlalchemy import ForeignKey, Integer, String, Text
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.database import Base
 

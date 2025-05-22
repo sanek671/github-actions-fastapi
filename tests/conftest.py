@@ -1,13 +1,14 @@
 import os
+
 import httpx
 import pytest_asyncio
 from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from src.main import app
-from src.database import Base
-from src.crud import get_db
 
+from src.crud import get_db
+from src.database import Base
+from src.main import app
 
 os.environ["TESTING"] = "1"
 

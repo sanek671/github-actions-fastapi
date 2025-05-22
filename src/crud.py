@@ -1,12 +1,12 @@
 from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select, desc, asc
+from sqlalchemy import asc, desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_db
 from src.models import Recipe, RecipeIngredient
-from src.schemas import RecipeList, RecipeDetail, RecipeCreate
-
+from src.schemas import RecipeCreate, RecipeDetail, RecipeList
 
 router = APIRouter(tags=["recipes"])
 
